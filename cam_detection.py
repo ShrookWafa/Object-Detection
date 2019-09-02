@@ -13,6 +13,11 @@ def get_colors(num_colors):
         lightness = (50 + np.random.rand() * 10)/100.
         saturation = (90 + np.random.rand() * 10)/100.
         colors.append(colorsys.hls_to_rgb(hue, lightness, saturation))
+        
+    for i in range(80):
+        colors[i] = tuple(255*x for x in colors[i])
+    random.shuffle(colors)
+    
     return colors
 
 execution_path = os.getcwd()
@@ -25,15 +30,12 @@ detector.loadModel(detection_speed='fastest')
 cap = cv2.VideoCapture(0)
 save_count = 0
 
-# Define a color for every class
+# To define a color for every class
 color_count = 0
 color_map = dict()
 
-# Generate 80 colors for bounding boxes and shuffle them
+# Generate 80 colors for bounding boxes
 colors = get_colors(80)
-for i in range(80):
-    colors[i] = tuple(255*x for x in colors[i])
-random.shuffle(colors)
 
 while(True):
     # Capture frame-by-frame
@@ -51,7 +53,7 @@ while(True):
         box = detections[i]['box_points']
         c = colors[color_map[n]]
         cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), c, 2)
-        cv2.putText(frame, n,(box[0]-3, box[1]-3), 2, 1.5, c)
+        cv2.putText(frame, n,(box[0]-3, box[1]-5), 2, 0.7, c)
 
     # Display the resulting frame
     cv2.imshow('frame', frame)
