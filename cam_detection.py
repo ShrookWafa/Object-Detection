@@ -25,7 +25,7 @@ execution_path = os.getcwd()
 detector = ObjectDetection()
 detector.setModelTypeAsRetinaNet()
 detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
-detector.loadModel(detection_speed='flash')
+detector.loadModel(detection_speed='faster')
 
 cap = cv2.VideoCapture(0)
 save_count = 0
