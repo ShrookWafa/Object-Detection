@@ -3,6 +3,7 @@ import cv2
 from imageai.Detection import ObjectDetection
 import os
 import colorsys
+import random
 
 # Generate random n colors
 def get_colors(num_colors):
